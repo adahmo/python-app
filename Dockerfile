@@ -1,5 +1,5 @@
 FROM python:3.9-slim
-#Set working directory
+#Set work directory
 WORKDIR /app
 #Copy the files
 COPY requirements.txt requirements.txt
