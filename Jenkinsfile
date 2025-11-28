@@ -26,7 +26,7 @@ pipeline {
         stage ('Docker Run'){
             steps {
                 script {
-                    #Run container
+                    //Run container
                     dockerImage.run('-p 8000:8000')
                 }
             }
@@ -36,7 +36,7 @@ pipeline {
         stage('Adah-Push to Dockerhub'){
             steps{
                 script {
-                    #Pushing to dockerhub
+                    //Pushing to dockerhub
                     dockerImage.push("$env.BUILD_NUMBER}")
                     dcokerImage.push('latest')
                 }
