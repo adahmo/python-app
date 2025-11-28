@@ -4,7 +4,7 @@ WORKDIR /app
 #Copy the files
 COPY requirements.txt requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
-COPY app.py .
+COPY adah.py .
 #Run the app
 CMD [ "python", "adah.py" ]
 # Expose port 8000
