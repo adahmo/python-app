@@ -25,9 +25,9 @@ pipeline {
             steps {
                 script {
                     echo "Starting container for test"
-                    sh "docker run -d --name adah-container1 -p 8005:8005 ${DOCKER_IMAGE}:${env.BUILD_NUMBER}"
-                    sh "sleep 30"
-                    sh "curl -f http://localhost:8005 || (docker logs adah-container1 && exit 1)"
+                    sh "docker run -d --name adah-container1 -p 8000:8000 ${DOCKER_IMAGE}:${env.BUILD_NUMBER}"
+                    sh "sleep 60"
+                    sh "curl -f http://localhost:8000 || (docker logs adah-container1 && exit 1)"
                 }
             }
         }

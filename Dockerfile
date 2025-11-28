@@ -8,4 +8,4 @@ COPY adah.py .
 #Run the app
 CMD [ "python", "adah.py" ]
 # Expose port 
-EXPOSE 8005
+EXPOSE 8000
