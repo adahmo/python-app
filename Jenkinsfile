@@ -32,7 +32,7 @@ pipeline {
                     sh "sleep 30"
             
                     // Test the container by curling the exposed port
-                    sh "curl -f http://localhost:8005 || (docker logs adah-container && exit 1)"
+                    sh "curl -f http://localhost:8005 || (docker logs adah-container1 && exit 1)"
                 }
            }
         }
@@ -48,5 +48,12 @@ pipeline {
                 }
             }
         }
+
+        post {
+           always {
+               sh "docker rm -f adah-container1 || true"
+           }
+        }
+
     }
 }
