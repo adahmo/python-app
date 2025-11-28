@@ -6,6 +6,13 @@ pipeline {
 
     }
     stages {
+        stage('Pull Scm'){
+            steps{
+                checkout scm
+
+            }
+        }
+    }    
         stage('Adah-Build Docker Image'){
             steps{
                 script {
@@ -15,7 +22,6 @@ pipeline {
             }
 
         }
-    }
         stage('Adah-Login to Dockerhub'){
             steps{
                 script {
@@ -23,6 +29,7 @@ pipeline {
                 }
                 
             }
+        }    
         stage ('Docker Run'){
             steps {
                 script {
@@ -31,8 +38,6 @@ pipeline {
                 }
             }
         }    
-
-        }
         stage('Adah-Push to Dockerhub'){
             steps{
                 script {
