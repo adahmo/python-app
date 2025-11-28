@@ -26,6 +26,7 @@ pipeline {
         stage ('Docker Run'){
             steps {
                 script {
+                    #Run container
                     dockerImage.run('-p 8000:8000')
                 }
             }
