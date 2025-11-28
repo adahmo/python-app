@@ -33,6 +33,7 @@ pipeline {
         stage('Push to Docker Hub') {
             steps {
                 script {
+                    //Push to dockerhub
                     docker.withRegistry('', DOCKERHUB_CREDENTIALS) {
                         dockerImage.push("${env.BUILD_NUMBER}")
                         dockerImage.push("latest")
