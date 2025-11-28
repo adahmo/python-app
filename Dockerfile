@@ -6,6 +6,6 @@ COPY requirements.txt requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 COPY app.py .
 #Run the app
-CMD [ "python", "appy.py" ]
+CMD [ "python", "adah.py" ]
 # Expose port 8000
 EXPOSE 8000
