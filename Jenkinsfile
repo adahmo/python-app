@@ -1,9 +1,11 @@
+def dockerImage  // declare globally so it can be reused
+
 pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "adamumj/adahpy"          // ✅ avoid '.' in image name
-        DOCKERHUB_CREDENTIALS = "dockerhub"      // Jenkins credentials ID
+        DOCKER_IMAGE = "adamumj/adahpy"
+        DOCKERHUB_CREDENTIALS = "dockerhub"
     }
 
     stages {
@@ -15,19 +17,18 @@ pipeline {
 
         stage('Login') {
             steps {
-               // Example: Docker login using Jenkins credentials
-               withCredentials([usernamePassword(credentialsId: 'dockerhub',
-                                                 usernameVariable: 'USERNAME',
-                                                 passwordVariable: 'PASSWORD')]) {
-               sh 'echo $PASSWORD | docker login -u $USERNAME --password-stdin'
-               }
+                withCredentials([usernamePassword(credentialsId: 'dockerhub',
+                                                  usernameVariable: 'USERNAME',
+                                                  passwordVariable: 'PASSWORD')]) {
+                    sh 'echo $PASSWORD | docker login -u $USERNAME --password-stdin'
+                }
             }
         }
-        
-        
+
         stage('Build Docker Image') {
             steps {
                 script {
+                    // build using Dockerfile in repo root
                     dockerImage = docker.build("${DOCKER_IMAGE}:${env.BUILD_NUMBER}")
                 }
             }
@@ -38,12 +39,12 @@ pipeline {
                 script {
                     echo "Starting container for test"
                     sh "docker run -d --name adah-container1 -p 8000:8000 ${DOCKER_IMAGE}:${env.BUILD_NUMBER}"
-                    sh "sleep 60"
+                    sh "sleep 30"
                     sh "curl -f http://localhost:8000 || (docker logs adah-container1 && exit 1)"
                 }
             }
         }
-        
+
         stage('Push to Docker Hub') {
             steps {
                 script {
@@ -56,10 +57,11 @@ pipeline {
         }
     }
 
-    //post {
-        //always {
-            //echo "Cleaning up container"
-            //sh "docker rm -f adah-container1 || true"
-        //}
-    //}
+    post {
+        always {
+            // clean up test container
+            sh 'docker rm -f adah-container1 || true'
+        }
+    }
 }
+
