@@ -8,4 +8,4 @@ COPY app.py .
 #Run the app
 CMD [ "python", "appy.py" ]
 # Expose port 8000
-EXPOSE 800
+EXPOSE 8000
