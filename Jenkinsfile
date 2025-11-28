@@ -13,6 +13,18 @@ pipeline {
             }
         }
 
+        stage('Login') {
+            steps {
+               // Example: Docker login using Jenkins credentials
+               withCredentials([usernamePassword(credentialsId: 'docker-creds',
+                                                 usernameVariable: 'DOCKER_USER',
+                                                 passwordVariable: 'DOCKER_PASS')]) {
+               sh 'docker login -u $DOCKER_USER -p $DOCKER_PASS'
+               }
+            }
+        }
+        
+        
         stage('Build Docker Image') {
             steps {
                 script {
