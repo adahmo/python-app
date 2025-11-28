@@ -35,6 +35,7 @@ pipeline {
         stage('Adah-Push to Dockerhub'){
             steps{
                 script {
+                    #Pushing to dockerhub
                     dockerImage.push("$env.BUILD_NUMBER}")
                     dcokerImage.push('latest')
                 }
