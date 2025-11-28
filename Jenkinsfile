@@ -16,7 +16,7 @@ pipeline {
         stage('Login') {
             steps {
                // Example: Docker login using Jenkins credentials
-               withCredentials([usernamePassword(credentialsId: 'docker-creds',
+               withCredentials([usernamePassword(credentialsId: 'dockerhub',
                                                  usernameVariable: 'DOCKER_USER',
                                                  passwordVariable: 'DOCKER_PASS')]) {
                sh 'docker login -u $DOCKER_USER -p $DOCKER_PASS'
