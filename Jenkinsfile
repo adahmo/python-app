@@ -49,5 +49,5 @@ pipeline {
             //echo "Cleaning up container"
             //sh "docker rm -f adah-container1 || true"
         //}
-    }
+    //}
 }
