@@ -25,7 +25,7 @@ pipeline {
             steps {
                 script {
                     // Run container for testing
-                    dockerImage.run('-p 8000:8000')
+                    dockerImage.run('-p 8001:8000')
                 }
             }
         }
