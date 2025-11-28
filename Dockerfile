@@ -7,5 +7,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY adah.py .
 #Run the app
 CMD [ "python", "adah.py" ]
-# Expose port 
+# Expose port test
 EXPOSE 8000
